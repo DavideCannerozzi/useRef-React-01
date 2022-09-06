@@ -1,25 +1,27 @@
-import logo from './logo.svg';
+import { useRef,useEffect, useState } from 'react'
 import './App.css';
 
 function App() {
+
+  const [number,setNumber] = useState()
+  const prevNumber = useRef()
+
+  function getNumber(e){
+    setNumber(e.target.value)
+  }
+
+  useEffect(() => {
+    prevNumber.current = number
+  })
+
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input onChange={ getNumber }/>
+      <p>Your Number is: { number } Your Number was: { prevNumber.current }</p>
     </div>
-  );
+  )
 }
 
 export default App;
